@@ -5,7 +5,7 @@ import externalGlobals from 'rollup-plugin-external-globals'
 
 export default defineConfig({
   define:{
-    'import.meta.env.VERSION':version,
+    'import.meta.env.VERSION':`"${version}"`,
   },
   plugins: [vue()],
   build:{
