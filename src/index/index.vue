@@ -1,4 +1,5 @@
 <template>
+  <hash-view></hash-view>
   <div class="welcome">
     <section class="header">
       <h1>Youloge Pages</h1>
@@ -7,15 +8,20 @@
     </section>
     <main>
       <a href="https://github.com/youfeed/youloge.pages" >
-      <section class="one">
-        <h1>Github</h1>
-        <div class="github">
-          <img src="https://img.shields.io/github/stars/youfeed/youloge.pages?style=flat-square" alt="Github Stars" />
-          <img src="https://badgen.net/github/license/youfeed/youloge.pages?style=flat-square" alt="Github Version" />
-        </div>
-      </section>
-    </a>
+        <section class="one">
+          <h1>Github</h1>
+          <div class="github">
+            <img src="https://img.shields.io/github/stars/youfeed/youloge.pages?style=flat-square" alt="Github Stars" />
+            <img src="https://badgen.net/github/license/youfeed/youloge.pages?style=flat-square" alt="Github Version" />
+          </div>
+        </section>
+      </a>
     </main>
+    <article>
+      <div>
+        <a href="#welcome"> 文件路由 </a>
+      </div>
+    </article>
     <section class="footer">
       <p>皖ICP备 19004549号 公安备 34112402000344</p>
     </section>

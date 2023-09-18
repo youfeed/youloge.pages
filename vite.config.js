@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import externalGlobals from 'rollup-plugin-external-globals'
 
 export default defineConfig({
+  appType:'mpa',
   define:{
     'import.meta.env.VERSION':`"${version}"`,
   },
@@ -20,7 +21,7 @@ export default defineConfig({
       ],
       input:{
         index: 'index.html',
-        // drive: 'drive.html',
+        drive: 'drive.html',
         article: 'article.html'
       },
       output:{},

@@ -1,5 +1,6 @@
-import { createApp } from 'vue'
+import { createApp } from "vue"
+import youloge from 'youloge'
 import App from './article.vue'
-// import youloge from "youloge";
+import {config} from '../config.js'
+createApp(App).use(youloge,config).mount('#app')
 
-createApp(App).mount('#app')

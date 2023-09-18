@@ -1,5 +1,6 @@
 <template>
   <div>
+    <hash-view></hash-view>
     <y-header aria="云盘" aside="true"></y-header>
     <main class="drive">
       <div class="box">
@@ -109,6 +110,7 @@ const qrcode = computed(()=>{
 })
 // 复制外链
 const onCopy = ()=>{
+  location.hash = 'wallet/deposit';
   let {uuid,title,mime,created} = state;
   return [`文件：${title}`,`大小：${sized.value}`,`类型：${mime}`,`时间：${created}`,`地址：youloge.com/drive?f=${uuid}`].join('\r\n');
 }
@@ -121,6 +123,7 @@ const download = ()=>{
   let {uuid,downlink,cost} = state;
   console.log('233',uuid,downlink);
   downlink == null ? useFetch({mask:true}).vip('drive','download',{uuid:uuid}).then(res=>{
+    console.log('233',res);
     res.err == 200 ? (state.downlink = res.data.link,createURL()) : useDialog('confirm',{
       title:`${res.msg}`,
       content:`是否购买下载权限<span style='color: #f00;'><small>&</small>${Number(cost).toFixed(2)}<small>RGB</small></span>`,
@@ -129,7 +132,18 @@ const download = ()=>{
     }).then(()=>{onPayment();}).catch(e=>{
       useMessage('warning',`购买失败，${e}`)
     })
-  }).catch() : createURL()
+  }).catch(e=>{
+    console.log('233',e);
+    useMessage('warning',`购买失败，${e}`)
+    useDialog('confirm',{
+      title:`${e.msg}#${e.err}`,
+      content:`是否购买下载权限<span style='color: #f00;'><small>&</small>${Number(cost).toFixed(2)}<small>RGB</small></span>`,
+      cancel:'取消',
+      confirm:'购买'
+    }).then(()=>{onPayment();}).catch(e=>{
+      useMessage('warning',`购买失败，${e}`)
+    })
+  }) : createURL()
 }
 // 创建下载
 const createURL = ()=>{

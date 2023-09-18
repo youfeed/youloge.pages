@@ -1,7 +1,7 @@
 {
   "name": "youloge.pages",
   "private": false,
-  "version": "0.0.3",
+  "version": "0.0.5",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^3.3.4",
-    "youloge": "^1.4.6"
+    "youloge": "^1.4.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
