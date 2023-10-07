@@ -1,51 +1,45 @@
 <template>
-  <hash-view></hash-view>
+  <y-header></y-header>
   <div class="welcome">
-    <section class="header">
-      <h1>Youloge Pages</h1>
-      <h2>基于开放接口Youloge.io 实现的多入口单页</h2>
-      <h3>vite + vue + youloge</h3>
-    </section>
     <main>
-      <a href="https://github.com/youfeed/youloge.pages" >
-        <section class="one">
-          <h1>Github</h1>
-          <div class="github">
-            <img src="https://img.shields.io/github/stars/youfeed/youloge.pages?style=flat-square" alt="Github Stars" />
-            <img src="https://badgen.net/github/license/youfeed/youloge.pages?style=flat-square" alt="Github Version" />
-          </div>
-        </section>
-      </a>
+
     </main>
-    <article>
-      <div>
-        <a href="#welcome"> 文件路由 </a>
-      </div>
-    </article>
     <section class="footer">
       <p>皖ICP备 19004549号 公安备 34112402000344</p>
     </section>
   </div>
+  <hash-view></hash-view>
 </template>
-
 <script setup>
-import { reactive, toRefs } from "vue";
-
+import { inject, onMounted, reactive, toRefs } from "vue";
+const useFetch = inject('useFetch');
 const state = reactive({
+  query:'',
+  type:'',
+  label:'',
+  limit:10,
+  offset:0,
   connt:0
+});
+onMounted(()=>{
+  onShow()
 })
+const onShow = ()=>{
+  useFetch().api('search','welcome',{query:'0',limit:10,offset:0}).then(res=>{
+    console.log(res)
+  })
+}
 const onClick = ()=>{
   state.connt++;
 }
 const {connt} = toRefs(state)
 </script>
-
 <style lang="scss">
 .welcome{
   padding: 40px 0 0;
   position: relative;
   overflow: hidden;
-  background: #222;
+  background: #f2f2f2;
   height: 100vh;
   text-align: center;
   h1,h2,h3{
