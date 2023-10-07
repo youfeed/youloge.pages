@@ -1,7 +1,7 @@
 import { createApp } from "vue"
-import youloge from 'youloge'
+import Youloge from 'youloge'
 import App from './drive.vue'
 import {config} from '../config.js'
-
-createApp(App).use(youloge,config).mount('#app')
+console.log('YoulogeYoulogeYouloge',Youloge)
+createApp(App).use(Youloge,config).mount('#app')
 
