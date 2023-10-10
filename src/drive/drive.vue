@@ -1,6 +1,6 @@
 <template>
   <div>
-    <y-header aria="云盘" aside="true"></y-header>
+    <y-header logo="Youloge" aria="云文件"></y-header>
     <main class="drive" mx-auto flex  p-1 max-w-3xl mx-10  shadow-md mt-2 shadow-slate-500>
       <div class="box" flex-col style=" width: 100%; padding: 10px; ">
         <div class="head">

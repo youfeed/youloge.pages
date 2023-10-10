@@ -1,5 +1,5 @@
 <template>
-  <y-header></y-header>
+  <y-header logo="Youloge" aria="com"></y-header>
   <div class="welcome">
     <main>
 

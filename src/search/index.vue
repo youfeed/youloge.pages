@@ -1,5 +1,5 @@
 <template>
-  <y-header aria="搜索"></y-header>
+  <y-header aria="搜索" logo="Youloge"></y-header>
   <main class="search">
     <div class="search-content">
       <h1>搜索资源整合中...</h1>
@@ -17,13 +17,18 @@ const state = reactive({
   offset:0
 })
 onMounted(()=>{
-  state.query = new URL(location).searchParams.get('q');
+  state.q = new URL(location).searchParams.get('q');
   state.type = new URL(location).searchParams.get('t');
   onQuery()
 })
 const onQuery = ()=>{
-  let {query,type,limit,offset} = state;
-  useFetch().api('search','drive',{query,type,limit,offset}).then(res=>{
+  let {q,type,limit,offset} = state;
+  useFetch().api('search','drive',{q,type,limit,offset}).then(res=>{
+    console.log(res)
+  }).catch(err=>{
+
+  })
+  useFetch().vip('search','indexes',{q,type,limit,offset}).then(res=>{
     console.log(res)
   }).catch(err=>{
 
