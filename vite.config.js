@@ -3,6 +3,7 @@ import { version } from './package.json'
 import vue from '@vitejs/plugin-vue'
 import externalGlobals from 'rollup-plugin-external-globals'
 import UnoCSS from 'unocss/vite'
+const TYPE = 'SPA'
 export default defineConfig({
   appType:'mpa',
   define:{
@@ -10,14 +11,29 @@ export default defineConfig({
   },
   plugins: [vue(),UnoCSS()],
   build:{
-    cssCodeSplit:true,
+    // cssCodeSplit:true,
+    modulePreload:{ polyfill:false },
     rollupOptions: {
-      input:{
-        index: 'index.html',
-        drive: 'drive.html',
-        search: 'search.html',
-        article: 'article.html'
-      },
+      ...{
+        'SPA':{
+          input:{
+            article: 'article.html',
+          },
+          output:{
+            format: 'umd',
+            entryFileNames:'assets/[name].js',
+          },
+        },
+        'MPA':{
+          input:{
+            index: 'index.html',
+            drive: 'drive.html',
+            search: 'search.html',
+            article: 'article.html'
+          },
+          output:{},
+        }
+      }[TYPE],
       external: ['vue','youloge'],
       plugins:[
         externalGlobals({
@@ -25,7 +41,6 @@ export default defineConfig({
           youloge: 'youloge',
         })
       ],
-      output:{},
     }
   },
 })
