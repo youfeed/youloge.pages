@@ -118,7 +118,7 @@ const onCopy = ()=>{
   return [`文件：${title}`,`大小：${sized.value}`,`类型：${mime}`,`时间：${created}`,`地址：${location.origin}/drive?f=${uuid}`].join('\r\n');
 }
 // 推广分享
-const shareing = ()=>{  
+const shareing = ()=>{
   console.log('shareing');
   useMessage('warning','推广分享内测中')
 }

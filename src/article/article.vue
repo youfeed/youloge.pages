@@ -12,8 +12,8 @@
 </template>
 
 <script setup>
-import { computed, inject,onMounted,reactive,watch,toRefs } from 'vue';
-const useFetch = inject('useFetch'), useDialog = inject('useDialog'),useMessage = inject('useMessage'),usePlus = inject('usePlus');
+import { computed, inject,onMounted,reactive,watch,toRefs, onUpdated } from 'vue';
+const useFetch = inject('useFetch'), useDialog = inject('useDialog'),useMessage = inject('useMessage');
 let state = reactive({
   uuid:'',
   title:'',
@@ -40,7 +40,10 @@ onMounted(()=>{
     SyncContent()
   }).catch(err=>{
     useDialog('alert',{title:'网络错误',content:'请检查网络'})
-  }) : useDialog('alert',{title:'文章过期或失效',content:'改UUID无法提供服务'})
+  }) : useDialog('alert',{title:'文章过期或失效',content:'改UUID无法提供服务'});
+})
+onUpdated(()=>{
+  Prism.highlightAll()
 })
 const SyncContent = ()=>{
   fetch(`https://cdn.youloge.com/${state.uuid}?${new Date() / 1000 / 300 >> 0}`).then(r=>r.text()).then(content=>{
@@ -129,13 +132,11 @@ const onVerify = (data)=>{
 watch(
   () => state.title,
   (value, _) => {
-    document.title = `${value} - youloge.云盘`;
+    document.title = `${value} - youloge·专栏`;
     var meta = document.createElement('meta');
     meta.setAttribute('name', 'description');
     meta.setAttribute('content', state.intro);
-    console.log(meta)
     document.head.appendChild(meta);
-    // document.querySelector('head meta[name="description"]')?.content=state.intro
   }, {immediate:true}
 )
 

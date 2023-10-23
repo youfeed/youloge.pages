@@ -3,7 +3,7 @@ import { version } from './package.json'
 import vue from '@vitejs/plugin-vue'
 import externalGlobals from 'rollup-plugin-external-globals'
 import UnoCSS from 'unocss/vite'
-const TYPE = 'SPA'
+const TYPE = 'MPA'
 export default defineConfig({
   appType:'mpa',
   define:{
@@ -17,7 +17,7 @@ export default defineConfig({
       ...{
         'SPA':{
           input:{
-            article: 'article.html',
+            video: 'video.html',
           },
           output:{
             format: 'umd',
