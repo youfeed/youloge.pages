@@ -2,7 +2,9 @@
   <y-header logo="Youloge" aria="com"></y-header>
   <div class="welcome">
     <main>
-
+      <div v-for="(province,index) in root" :key="index">
+        
+      </div>
     </main>
     <section class="footer">
       <p>皖ICP备 19004549号 公安备 34112402000344</p>
@@ -14,6 +16,7 @@
 import { inject, onMounted, reactive, toRefs } from "vue";
 const useFetch = inject('useFetch');
 const state = reactive({
+  root:[],
   query:'',
   type:'',
   label:'',
@@ -22,7 +25,7 @@ const state = reactive({
   connt:0
 });
 onMounted(()=>{
-  onShow()
+  // onShow()
 })
 const onShow = ()=>{
   useFetch().api('search','welcome',{query:'0',limit:10,offset:0}).then(res=>{
@@ -32,7 +35,7 @@ const onShow = ()=>{
 const onClick = ()=>{
   state.connt++;
 }
-const {connt} = toRefs(state)
+const {connt,root} = toRefs(state)
 </script>
 <style lang="scss">
 .welcome{

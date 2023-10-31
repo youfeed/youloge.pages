@@ -17,7 +17,7 @@ export default defineConfig({
       ...{
         'SPA':{
           input:{
-            video: 'video.html',
+            profile: 'profile.html',
           },
           output:{
             format: 'umd',
@@ -28,7 +28,9 @@ export default defineConfig({
           input:{
             index: 'index.html',
             drive: 'drive.html',
+            goods: 'goods.html',
             search: 'search.html',
+            profile: 'profile.html',
             article: 'article.html'
           },
           output:{},

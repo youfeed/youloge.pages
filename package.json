@@ -1,7 +1,8 @@
 {
   "name": "youloge.pages",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.2.3",
+  "description": "Github Pages 务必使用MPA模式",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +11,7 @@
   },
   "dependencies": {
     "vue": "^3.3.4",
-    "youloge": "^1.8.6"
+    "youloge": "^1.9.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
