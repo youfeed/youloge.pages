@@ -7,6 +7,7 @@
         <div class="author">{{ updated }}</div>
         <div class="article-content" v-html="content" v-preview></div>
       </div>
+      <y-discuss :uuid="uuid"  v-show="uuid"></y-discuss>
     </main>
   </div>
 </template>

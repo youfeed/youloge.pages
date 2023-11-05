@@ -1,7 +1,7 @@
 <template>
   <div>
     <y-header logo="Youloge" aria="云文件"></y-header>
-    <main class="drive" mx-auto flex  p-1 max-w-3xl mx-10  shadow-md mt-2 shadow-slate-500>
+    <main class="drive" mx-auto flex flex-col p-1 max-w-3xl mx-10  shadow-md mt-2 shadow-slate-500>
       <div class="box" flex-col style=" width: 100%; padding: 10px; ">
         <div class="head">
           <details style=" border-left: 4px solid #8BC34A; padding-left: 20px; ">
@@ -59,6 +59,7 @@
           </div>
         </div>
       </div>
+      <y-discuss :uuid="uuid" v-show="uuid"></y-discuss>
     </main>
     <y-footer></y-footer>
     <hash-view></hash-view>

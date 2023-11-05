@@ -5,8 +5,10 @@
       <y-video v-if="uuid" :uuid="uuid" :poster="`//img.youloge.com/${poster}1`"></y-video>
     </div>
     <div class="metadata">
-      <h1>{{ title }}</h1>
+      <h1 class="title">{{ title }}</h1>
+      <p>{{ intro }}</p>
     </div>
+    <y-discuss :uuid="uuid" v-show="uuid"></y-discuss>
   </main>
 </template>
 
@@ -49,5 +51,8 @@ watch(
 .video{
   max-width: 680px;
   margin: 0 auto;
+  .title{
+    font-size: 24px;
+  }
 }
 </style>
