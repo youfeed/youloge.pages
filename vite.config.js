@@ -26,6 +26,7 @@ export default defineConfig({
         },
         'MPA':{
           input:{
+            404: '404.html',
             index: 'index.html',
             drive: 'drive.html',
             goods: 'goods.html',
