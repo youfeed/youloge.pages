@@ -1,14 +1,14 @@
 {
   "name": "youloge.pages",
   "private": true,
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Github Pages 务必使用MPA模式",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "publish": ""
+    "publish": "git add . && git commit -m 'update' && git push"
   },
   "dependencies": {
     "vue": "^3.3.4",
