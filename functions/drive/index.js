@@ -22,6 +22,6 @@ export function onRequest({request,env}) {
   // const request = context.request;
   const cf = request.cf;
   const algorithm = 'aes-128-cbc';
-  let data = {secret:secret,request:request,signature:signature,de_two:de_two}
+  let data = {secret:secret,request:request,signature:signature,de_two:de_two.toString()}
   return new Response(JSON.stringify(data, null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
 } 
