@@ -53,10 +53,10 @@ const Decrypt = async(secret,secret)=>{
   const de_two = await crypto.subtle.decrypt({ name: "AES-CBC", iv }, key_two, de_one);
   return new TextDecoder("utf-8").decode(de_two);
 }
-export function onRequest({request,env}) {
+export async function onRequest({request,env}) {
   const signature = request.headers.get("Signature");
   const secret = env.secret;
-  const text = Decrypt(secret,signature);
+  const text = await Decrypt(secret,signature);
 
   // const encode = new TextEncoder().encode(secret)
   // const request = context.request;
