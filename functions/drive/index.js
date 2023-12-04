@@ -6,16 +6,21 @@ const Decrypt = async()=>{
   const two = crypto.subtle.decrypt({ name: "AES-CBC", iv }, key, ciphertext);
 }
 export function onRequest({request,env}) {
+  const signature = request.headers.get("Signature");
   const secret = env.secret;
   const atobs = atob(secret);
+  const signatures = atob(signature);
+  const iv = atobs.slice(0,16);
+  const text = atobs.slice(16,);
   const one = atobs.slice(0,32);
   const two = atobs.slice(32,64);
   const importKey  = crypto.subtle.importKey("raw", one, "AES-CBC", true, ["encrypt","decrypt",]);
+  const de_one = crypto.subtle.decrypt({ name: "AES-CBC", iv }, one, text);
+  const de_two = crypto.subtle.decrypt({ name: "AES-CBC", iv }, one, de_one);
   // const encode = new TextEncoder().encode(secret)
   // const request = context.request;
   const cf = request.cf;
-  const Signature = request.headers.get("Signature");
   const algorithm = 'aes-128-cbc';
-  let data = {secret:secret,request:request,signature:Signature,encode:`${atobs.length},${one.length},${two.length}`}
+  let data = {secret:secret,request:request,signature:signature,de_two:de_two}
   return new Response(JSON.stringify(data, null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
 } 
