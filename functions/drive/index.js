@@ -1,6 +1,6 @@
 const Decrypt = async()=>{
-  const rawKey = crypto.getRandomValues(new Uint8Array(16));
   const importKey  = crypto.subtle.importKey("raw", rawKey, "AES-CBC", true, ["encrypt","decrypt",]);
+  const rawKey = crypto.getRandomValues(new Uint8Array(16));
   // crypto.subtle.importKey({name:'AES-CBC'})
   const one = crypto.subtle.decrypt({ name: "AES-CBC", iv }, key, ciphertext);
   const two = crypto.subtle.decrypt({ name: "AES-CBC", iv }, key, ciphertext);
@@ -17,4 +17,4 @@ export function onRequest({request,env}) {
   const algorithm = 'aes-128-cbc';
   let data = {secret:secret,request:request,signature:Signature,encode:`${atobs.length},${one.length},${two.length}`}
   return new Response(JSON.stringify(data, null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
-}
+} 
