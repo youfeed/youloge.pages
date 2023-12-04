@@ -40,7 +40,7 @@ const base64DecToArr = (sBase64, nBlocksSize) =>{
 
   return taBytes;
 }
-const Decrypt = async(secret,secret)=>{
+const Decrypt = async(secret,signat)=>{
   const atobs = base64DecToArr(secret);
   const signature = base64DecToArr(signat);
   const one = atobs.slice(0,32);
