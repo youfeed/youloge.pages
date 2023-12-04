@@ -7,6 +7,6 @@ export function onRequest({request,env}) {
   // const request = context.request;
   const cf = request.cf;
   const Signature = request.headers.get("Signature");
-  let data = {secret:secret,request:request,Signature:Signature,cf:cf}
+  let data = {secret:secret,request:request,signature:Signature,cf:cf}
   return new Response(JSON.stringify(data, null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
 }
