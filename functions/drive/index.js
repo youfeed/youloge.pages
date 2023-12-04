@@ -10,6 +10,7 @@ export function onRequest({request,env}) {
   const atobs = atob(secret);
   const one = atobs.slice(0,32);
   const two = atobs.slice(32,64);
+  const importKey  = crypto.subtle.importKey("raw", one, "AES-CBC", true, ["encrypt","decrypt",]);
   // const encode = new TextEncoder().encode(secret)
   // const request = context.request;
   const cf = request.cf;
