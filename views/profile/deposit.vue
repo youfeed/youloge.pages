@@ -44,6 +44,7 @@ const state = reactive({
   money:'10.00',
 })
 onMounted(()=>{
+  console.log(useFetch)
   getBalance()
 })
 // 实时余额

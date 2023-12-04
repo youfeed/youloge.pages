@@ -1,7 +1,10 @@
 <template>
-  <y-header logo="Youloge" aria="com"></y-header>
+  <y-header logo="Youloge" aria="com"></y-header><hash-view></hash-view>
   <div class="welcome">
     <main>
+      <a href="#profile/info"><h1>欢迎使用Youloge</h1></a>
+      <a href="#drive/index"><h1>我的云盘</h1></a>
+      
       <div v-for="(province,index) in root" :key="index">
         
       </div>
@@ -10,7 +13,6 @@
       <p>皖ICP备 19004549号 公安备 34112402000344</p>
     </section>
   </div>
-  <hash-view></hash-view>
 </template>
 <script setup>
 import { inject, onMounted, reactive, toRefs } from "vue";
