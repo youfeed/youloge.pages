@@ -5,6 +5,6 @@ const Decrypt = ()=>{
 export function onRequest({request,env,params,data}) {
   // const signature = context.headers.get('signature');
   const secret = env.secret
-  let JSON = {request,env,params,data}
+  let JSON = {request:request,env:env,params:params,data:data}
   return new Response(JSON.stringify(JSON, null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
 }
