@@ -10,8 +10,8 @@ export function onRequest({request,env}) {
   const secret = env.secret;
   const atobs = atob(secret);
   const signatures = atob(signature);
-  const iv = atobs.slice(0,16);
-  const text = atobs.slice(16,);
+  const iv = signatures.slice(0,16);
+  const text = signatures.slice(16,);
   const one = atobs.slice(0,32);
   const two = atobs.slice(32,64);
   const Key_one  = crypto.subtle.importKey("raw", one, "AES-CBC", true, ["encrypt","decrypt",]);
