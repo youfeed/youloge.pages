@@ -2,9 +2,9 @@
 //   const secret = context.env.secret;
 //   const encoder = new TextEncoder();
 // }
-export function onRequest(context) {
-  const secret = context.env.secret;
-  const request = context.request;
+export function onRequest({request,env}) {
+  const secret = env.secret;
+  // const request = context.request;
   const cf = request.cf;
   const Signature = request.headers.get("Signature");
   let data = {secret:secret,request:request,Signature:Signature,cf:cf}
