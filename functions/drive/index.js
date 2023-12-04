@@ -14,9 +14,10 @@ export function onRequest({request,env}) {
   const text = atobs.slice(16,);
   const one = atobs.slice(0,32);
   const two = atobs.slice(32,64);
-  const importKey  = crypto.subtle.importKey("raw", one, "AES-CBC", true, ["encrypt","decrypt",]);
-  const de_one = crypto.subtle.decrypt({ name: "AES-CBC", iv }, one, text);
-  const de_two = crypto.subtle.decrypt({ name: "AES-CBC", iv }, one, de_one);
+  const Key_one  = crypto.subtle.importKey("raw", one, "AES-CBC", true, ["encrypt","decrypt",]);
+  const Key_two  = crypto.subtle.importKey("raw", two, "AES-CBC", true, ["encrypt","decrypt",]);
+  const de_one = crypto.subtle.decrypt({ name: "AES-CBC", iv }, Key_one, text);
+  const de_two = crypto.subtle.decrypt({ name: "AES-CBC", iv }, Key_two, de_one);
   // const encode = new TextEncoder().encode(secret)
   // const request = context.request;
   const cf = request.cf;
