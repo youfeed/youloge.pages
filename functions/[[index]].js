@@ -11,6 +11,9 @@ export async function onRequestPost(context) {
   const contentType = request.headers.get("content-type") || "";
   const signature = request.headers.get("Signature");
   const {uuid,signer,expire} = await AESCBC_decrypt(secret,signature);
+  if(timer > expire){
+    new Response(JSON.stringify({code:401,msg:'签名已过期'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
+  }
   const text = await fetch(`https://vip.youloge.com${path}`, {
     method: 'POST',
     headers: {'content-Type': 'application/json','signer': signer},
