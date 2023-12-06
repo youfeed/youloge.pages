@@ -10,7 +10,7 @@ export async function onRequestPost(context) {
   const contentType = request.headers.get("content-type") || "";
   const signature = request.headers.get("Signature");
   const {uuid,signer,expire} = await AESCBC_decrypt(secret,signature);
-  return new Response(JSON.stringify([path,params,body,method,contentType,json,uuid,signer,expire], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
+  return new Response(JSON.stringify([secret,signature,path,params,body,method,contentType,json,uuid,signer,expire], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
     // {request,env}
     // const secret = env.secret;
     // const signature = request.headers.get("Signature");
