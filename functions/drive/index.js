@@ -4,7 +4,7 @@ export async function onRequest(context) {
   const params = context.params
   const request = context.request
   const method = request.method
-  const body = await request.body
+  const body = request.body
   const contentType = context.headers.get("content-type") || "ss";
   return new Response(JSON.stringify([body,params,method,request,contentType], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
   // {request,env}
