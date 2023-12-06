@@ -9,7 +9,12 @@ export const AESCBC_decrypt = async(secret,string)=>{
   const key_two  = await crypto.subtle.importKey("raw", two, "AES-CBC", true, ["encrypt","decrypt",]);
   const de_one = await crypto.subtle.decrypt({ name: "AES-CBC", iv }, key_one, text);
   const de_two = await crypto.subtle.decrypt({ name: "AES-CBC", iv }, key_two, de_one);
-  return new TextDecoder("utf-8").decode(de_two);
+  try{
+    return JSON.parse(new TextDecoder("utf-8").decode(de_two));
+  }
+  catch{
+    return {};
+  }
 }
 export const b64ToUint6 = (nChr)=>{
   return nChr > 64 && nChr < 91
