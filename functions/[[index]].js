@@ -2,13 +2,9 @@ import {AESCBC_decrypt} from './_util.js'
 export async function onRequestPost(context) {
   const path = context.functionPath;
   const secret = context.env.secret;
-  const params = context.params;
-  const body = context.body;
   const request = context.request;
-  const method = request.method;
   const timer = new Date().getTime() / 1000 >> 0;
   const json =  await request.text();
-  const contentType = request.headers.get("content-type") || "";
   const signature = request.headers.get("Signature");
   const {uuid,signer,expire} = await AESCBC_decrypt(secret,signature);
   if(signer == undefined){
