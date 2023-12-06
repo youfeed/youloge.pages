@@ -2,9 +2,9 @@ import {AESCBC_decrypt} from '../_util.js'
 export async function onRequest(context) {
   const functionPath = context.functionPath;
   const params = context.params
+  const body = context.body
   const request = context.request
   const method = request.method
-  const body = request.body
   const contentType = context.headers.get("content-type") || "ss";
   return new Response(JSON.stringify([body,params,method,request,contentType], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
   // {request,env}
