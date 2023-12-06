@@ -11,13 +11,16 @@ export async function onRequestPost(context) {
   const contentType = request.headers.get("content-type") || "";
   const signature = request.headers.get("Signature");
   const {uuid,signer,expire} = await AESCBC_decrypt(secret,signature);
+  if(signer == undefined){
+    return new Response(JSON.stringify({err:403,msg:'签名错误'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
+  }
   if(timer > expire){
-    new Response(JSON.stringify({code:401,msg:'签名已过期'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
+    return new Response(JSON.stringify({err:401,msg:'签名已过期'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
   }
   const text = await fetch(`https://vip.youloge.com${path}`, {
     method: 'POST',
     headers: {'content-Type': 'application/json','signer': signer},
     body: json
-  }).then(r => r.json());
-  return new Response(JSON.stringify([path,params,body,method,contentType,json,uuid,timer,expire,text], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
+  }).then(r => r.text());
+  return new Response(text,{headers:{'content-type':'application/json;charset=UTF-8'}});
 }
