@@ -7,16 +7,14 @@ export async function onRequest({request,env}) {
   const text = await fetch('https://vip.youloge.com', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      'content-Type': 'application/json',
       'signer': signer
     },
     body: JSON.stringify({
       "method": 'list',
       "params": {}
     })
-  })
-  .then(response => response.json());
-  let data = {signature:signature,text:JSON.parse(text)}
+  }).then(r => r.json());
+  let data = {signature:signature,text:text}
   return new Response(JSON.stringify(data, null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
 } 
