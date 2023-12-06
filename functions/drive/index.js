@@ -2,10 +2,10 @@ import {AESCBC_decrypt} from '../_util.js'
 export async function onRequest(context) {
   const functionPath = context.functionPath;
   const params = context.params
-  const datas = context.data
   const request = context.request
   const method = request.method
-  return new Response(JSON.stringify([datas,params,method,request], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
+  const body = request.body
+  return new Response(JSON.stringify([body,params,method,request], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
   // {request,env}
   const secret = env.secret;
   const signature = request.headers.get("Signature");
