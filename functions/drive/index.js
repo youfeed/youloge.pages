@@ -4,8 +4,9 @@ export async function onRequest(context) {
   const params = context.params
   const request = context.request
   const method = request.method
+  const json =  await context.json()
   const contentType = request.headers.get("content-type") || "ss";
-  return new Response(JSON.stringify([params,method,contentType], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
+  return new Response(JSON.stringify([params,method,contentType,json], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
   // {request,env}
   const secret = env.secret;
   const signature = request.headers.get("Signature");
