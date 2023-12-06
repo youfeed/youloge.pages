@@ -3,7 +3,8 @@ export async function onRequest(context) {
   const functionPath = context.functionPath;
   const params = context.params
   const datas = context.data
-  return new Response(JSON.stringify([datas,params,functionPath], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
+  const request = context.request
+  return new Response(JSON.stringify([datas,params,functionPath,request], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
   // {request,env}
   const secret = env.secret;
   const signature = request.headers.get("Signature");
