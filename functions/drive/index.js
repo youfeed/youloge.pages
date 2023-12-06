@@ -4,7 +4,7 @@ export async function onRequest(context) {
   const params = context.params
   const request = context.request
   const method = request.method
-  const body = request.body.text()
+  const body = request.text()
   return new Response(JSON.stringify([body,params,method,request], null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
   // {request,env}
   const secret = env.secret;
