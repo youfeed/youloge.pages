@@ -15,6 +15,6 @@ export async function onRequest({request,env}) {
       "params": {}
     })
   }).then(r => r.json());
-  let data = {signature:signature,text:text}
+  let data = {signature:signature,text:text,request:request}
   return new Response(JSON.stringify(data, null, 2),{headers:{'content-type':'application/json;charset=UTF-8'}});
 } 
