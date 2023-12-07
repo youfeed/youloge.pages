@@ -16,9 +16,7 @@ export async function onRequestPost(context) {
   return new Response(JSON.stringify([json]),{headers:{'content-type':'application/json;charset=UTF-8'}})
   const text = await fetch(`https://vip.youloge.com${path}`, {
     method: 'POST',
-    headers: {
-      'content-Type': 'application/json',
-      'signer': signer},
+    headers: {'content-Type': 'application/json','signer': signer},
     body: json
   }).then(r => r.text());
   return new Response(text,{headers:{'content-type':'application/json;charset=UTF-8'}});
