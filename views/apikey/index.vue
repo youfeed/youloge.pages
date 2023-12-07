@@ -10,10 +10,10 @@ onMounted(()=>{
   onList()
 })
 const onList = ()=>{
-  useFetch().vip('apikey','list',{limit:10}).then(res=>{
+  useFetch().vip('apikey','list',{limit:10,offset:0}).then(res=>{
     console.log('apikey',res)
   })
-  useFetch().vip('drive','list',{limit:10}).then(res=>{
+  useFetch().vip('drive','list',{limit:10,offset:0}).then(res=>{
     console.log('drive',res)
   })
 }

@@ -77,5 +77,5 @@ export async function onRequestPost(context) {
     headers: {'content-Type': 'application/json','signer': signer},
     body: json
   }).then(r=>r.text());
-  return new Response(json,{headers:{'content-type':'application/json;charset=UTF-8'}});
+  return new Response(text,{headers:{'content-type':'application/json;charset=UTF-8'}});
 }
