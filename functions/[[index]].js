@@ -1,8 +1,8 @@
 import {AESCBC_decrypt} from './_util.js'
 export async function onRequestPost(context) {
-  return new Response(JSON.stringify([context]),{headers:{'content-type':'application/json;charset=UTF-8'}})
   const path = context.functionPath;
   const secret = context.env.secret;
+  return new Response(JSON.stringify([context]),{headers:{'content-type':'application/json;charset=UTF-8'}})
   const request = context.request;
   const timer = new Date().getTime() / 1000 >> 0;
   const json =  await request.text();
