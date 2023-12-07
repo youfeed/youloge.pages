@@ -11,7 +11,10 @@ onMounted(()=>{
 })
 const onList = ()=>{
   useFetch().vip('apikey','list',{limit:10}).then(res=>{
-    console.log('list',res)
+    console.log('apikey',res)
+  })
+  useFetch().vip('drive','list',{limit:10}).then(res=>{
+    console.log('drive',res)
   })
 }
 const onApply = () => {
