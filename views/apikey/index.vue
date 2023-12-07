@@ -1,27 +1,36 @@
 <template>
-  <div  class="head">我的密钥对</div>
-  <!-- <div @click="onApply">申请密钥</div> -->
+  <div  class="head">我的密钥对 </div>
+  <div class="list">
+    <div v-for="item in list" :key="item.id" @click="onApply(item.id)">
+      <div class="item">
+        <div class="desc">{{item.uuid}}</div>
+        <div class="title">{{item.ukey}}</div>
+        <div class="title">{{item.ip}}</div>
+        <div class="title">{{item.status}}</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { inject, onMounted } from "vue"
+import { inject, onMounted, reactive, toRefs } from "vue"
 const useFetch = inject('useFetch');
+const state = reactive({
+  list:[]
+})
 onMounted(()=>{
   onList()
 })
 const onList = ()=>{
   useFetch().vip('apikey','list',{limit:10,offset:0}).then(res=>{
+    state.list = res.data.list
     console.log('apikey',res)
-  })
-  useFetch().vip('drive','list',{limit:10,offset:0}).then(res=>{
-    console.log('drive',res)
   })
 }
 const onApply = () => {
-  useFetch().vip('apikey','apply',{ipv4:'0.0.0.0'}).then(res=>{
-    console.log('onApply',res)
-  })
+
 }
+const {list} = toRefs(state)
 </script>
 
 <style>

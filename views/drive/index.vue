@@ -32,7 +32,7 @@ const state = reactive({
 })
 const useFetch = inject('useFetch');
 onMounted(()=>{
-  useFetch().vip('drive','list').then(res=>{
+  useFetch().vip('drive','list',{limit:10,offset:0}).then(res=>{
     state.list = res.data.list;
     console.log(res)
   })
@@ -41,7 +41,7 @@ const onClick = (type,item)=>{
   let {uuid} = item
   let action = {
     perview:()=>{
-      window.open(`https://youloge.com/drive?f=${uuid}`,'drive')
+      window.open(`https://www.youloge.com/drive?f=${uuid}`,'drive')
     },editor:()=>{
       location.hash = `drive/draft/uuid=${uuid}`
     }
