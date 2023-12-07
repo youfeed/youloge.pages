@@ -15,8 +15,10 @@ export async function onRequestPost(context) {
   }
   const text = await fetch(`https://vip.youloge.com${path}`, {
     method: 'POST',
-    headers: {'content-Type': 'application/json','signer': signer},
+    headers: {
+      'content-Type': 'application/json',
+      'signer': signer},
     body: json
   }).then(r => r.text());
-  return new Response(text,{headers:{'content-type':'application/json;charset=UTF-8'}});
+  return new Response(text,{headers:{'content-type':'application/json;charset=UTF-8','Access-Control-Allow-Origin': '*','Access-Control-Max-Age': '86400'}});
 }
