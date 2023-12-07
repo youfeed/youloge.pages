@@ -1,6 +1,5 @@
 import {AESCBC_decrypt} from './_util.js'
 export async function onRequestPost(context) {
-  return new Response(JSON.stringify({err:403,msg:'签名错误'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
   const path = context.functionPath;
   const secret = context.env.secret;
   const request = context.request;
@@ -21,5 +20,5 @@ export async function onRequestPost(context) {
       'signer': signer},
     body: json
   }).then(r => r.text());
-  return new Response(text,{headers:{'content-type':'application/json;charset=UTF-8','Access-Control-Allow-Origin': '*','Access-Control-Allow-Headers':'*','Access-Control-Max-Age': '86400'}});
+  return new Response(text,{headers:{'content-type':'application/json;charset=UTF-8'}});
 }
