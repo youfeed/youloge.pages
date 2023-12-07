@@ -41,18 +41,21 @@ const base64DecToArr = (sBase64, nBlocksSize) =>{
   return taBytes;
 }
 const AES_decrypt = async(secret,string)=>{
-  const atobs = base64DecToArr(secret);
-  const signature = base64DecToArr(string);
-  const one = atobs.slice(0,32);
-  const two = atobs.slice(32,64);
-  const iv = signature.slice(0,16);
-  const text = signature.slice(16,);
-  const key_one  = await crypto.subtle.importKey("raw", one, "AES-CBC", true, ["encrypt","decrypt",]);
-  const key_two  = await crypto.subtle.importKey("raw", two, "AES-CBC", true, ["encrypt","decrypt",]);
-  const de_one = await crypto.subtle.decrypt({ name: "AES-CBC", iv }, key_one, text);
-  const de_two = await crypto.subtle.decrypt({ name: "AES-CBC", iv }, key_two, de_one);
-  return JSON.parse(new TextDecoder("utf-8").decode(de_two));
-  // return new TextDecoder("utf-8").decode(de_two);
+  try{
+    const atobs = base64DecToArr(secret);
+    const signature = base64DecToArr(string);
+    const one = atobs.slice(0,32);
+    const two = atobs.slice(32,64);
+    const iv = signature.slice(0,16);
+    const text = signature.slice(16,);
+    const key_one  = await crypto.subtle.importKey("raw", one, "AES-CBC", true, ["encrypt","decrypt",]);
+    const key_two  = await crypto.subtle.importKey("raw", two, "AES-CBC", true, ["encrypt","decrypt",]);
+    const de_one = await crypto.subtle.decrypt({ name: "AES-CBC", iv }, key_one, text);
+    const de_two = await crypto.subtle.decrypt({ name: "AES-CBC", iv }, key_two, de_one);
+    return JSON.parse(new TextDecoder("utf-8").decode(de_two));
+  } catch (error) {
+    return {}
+  }
 }
 export async function onRequestPost(context) {
   const path = context.functionPath;
@@ -61,8 +64,8 @@ export async function onRequestPost(context) {
   const timer = new Date().getTime() / 1000 >> 0;
   const json =  await request.text();
   const signature = request.headers.get("Signature");
-  const {signer,expire} = await AES_decrypt(secret,signature);
-  // return new Response(JSON.stringify([context,decrypt]),{headers:{'content-type':'application/json;charset=UTF-8'}})
+  const {signer,expire} = await AES_decrypt(secret,signature) ;
+  // AES_decrypt 需要try catch 包裹
   if(signer === undefined){
     return new Response(JSON.stringify({err:403,msg:'签名错误'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
   }
@@ -73,6 +76,6 @@ export async function onRequestPost(context) {
     method: 'POST',
     headers: {'content-Type': 'application/json','signer': signer},
     body: json
-  }).then(r => r.text());
-  return new Response(text,{headers:{'content-type':'application/json;charset=UTF-8'}});
+  }).then(r=>r.text());
+  return new Response(json,{headers:{'content-type':'application/json;charset=UTF-8'}});
 }
