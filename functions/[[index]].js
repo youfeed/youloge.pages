@@ -20,5 +20,5 @@ export async function onRequestPost(context) {
       'signer': signer},
     body: json
   }).then(r => r.text());
-  return new Response(text,{headers:{'content-type':'application/json;charset=UTF-8','Access-Control-Allow-Origin': '*','Access-Control-Max-Age': '86400'}});
+  return new Response(text,{headers:{'content-type':'application/json;charset=UTF-8','Access-Control-Allow-Origin': '*','Access-Control-Allow-Headers':'*','Access-Control-Max-Age': '86400'}});
 }
