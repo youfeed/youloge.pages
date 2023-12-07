@@ -10,8 +10,8 @@ for (const key in modules) {
   })
 }
 export const config = {
-  // 配置参数
-  UKEY:'qRjE+HMLB8WcnAvdcon5Lx2BSGid7OdQUd5ozRV8QHj4sgP91+Y6xMfhrHZbONGpLErJGMZFZ8GAcEwINSE4VjwdEvna0DwHUJ3zzQNFlQg8s8nhqo4/I3y00q31eYi4',
+  // 配置参数 
+  UKEY:'8rR/lr0ugwqzUvBWGABJYRhTZnW+bDiS/1ha+mbat19zGuSX2hW8nHPkVxgaE1BguqDNiiCuSiVCvSk6bI21pqcOCJ50Mqd/9nOv9K4tNrjXx5J0HisriHHmv+2o25WQ',
   APIURL:'https://api.youloge.com',
   VIPURL:'https://www.youloge.com',
   OPENURL:'https://www.youloge.com',
