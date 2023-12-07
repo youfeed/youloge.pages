@@ -6,7 +6,7 @@ export async function onRequestPost(context) {
   const timer = new Date().getTime() / 1000 >> 0;
   const json =  await request.text();
   const signature = request.headers.get("Signature");
-  return new Response(JSON.stringify([context,signature]),{headers:{'content-type':'application/json;charset=UTF-8'}})
+  return new Response(JSON.stringify([context,secret,signature]),{headers:{'content-type':'application/json;charset=UTF-8'}})
   const {uuid,signer,expire} = await AESCBC_decrypt(secret,signature);
   if(signer === undefined){
     return new Response(JSON.stringify({err:403,msg:'签名错误'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
