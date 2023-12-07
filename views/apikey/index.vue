@@ -1,12 +1,19 @@
 <template>
   <div  class="head">我的密钥对</div>
-  <div @click="onApply">申请密钥</div>
+  <!-- <div @click="onApply">申请密钥</div> -->
 </template>
 
 <script setup>
-import { inject } from "vue"
-
-const useFetch = inject('useFetch')
+import { inject, onMounted } from "vue"
+const useFetch = inject('useFetch');
+onMounted(()=>{
+  onList()
+})
+const onList = ()=>{
+  useFetch().vip('apikey','list',{linit:10}).then(res=>{
+    console.log('list',res)
+  })
+}
 const onApply = () => {
   useFetch().vip('apikey','apply',{ipv4:'0.0.0.0'}).then(res=>{
     console.log('onApply',res)
