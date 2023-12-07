@@ -13,6 +13,7 @@ export async function onRequestPost(context) {
   if(timer > expire){
     return new Response(JSON.stringify({err:401,msg:'签名已过期'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
   }
+  return new Response(JSON.stringify([json]),{headers:{'content-type':'application/json;charset=UTF-8'}})
   const text = await fetch(`https://vip.youloge.com${path}`, {
     method: 'POST',
     headers: {
