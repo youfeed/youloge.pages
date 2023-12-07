@@ -8,7 +8,7 @@ import { inject } from "vue"
 
 const useFetch = inject('useFetch')
 const onApply = () => {
-  useFetch().vip('apikey','apply',{ip:'0.0.0.0'}).then(res=>{
+  useFetch().vip('apikey','apply',{ipv4:'0.0.0.0'}).then(res=>{
     console.log('onApply',res)
   })
 }
