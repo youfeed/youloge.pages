@@ -51,6 +51,7 @@ const AES_decrypt = async(secret,string)=>{
   const key_two  = await crypto.subtle.importKey("raw", two, "AES-CBC", true, ["encrypt","decrypt",]);
   const de_one = await crypto.subtle.decrypt({ name: "AES-CBC", iv }, key_one, text);
   const de_two = await crypto.subtle.decrypt({ name: "AES-CBC", iv }, key_two, de_one);
+  return new TextDecoder("utf-8").decode(de_two);
   return JSON.parse(new TextDecoder("utf-8").decode(de_two));
 }
 export async function onRequestPost(context) {
