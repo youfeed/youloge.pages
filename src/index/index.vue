@@ -1,18 +1,20 @@
 <template>
-  <y-header logo="Youloge" aria="com"></y-header><hash-view></hash-view>
   <div class="welcome">
-    <main>
-      <a href="#profile/info"><h1>欢迎使用Youloge</h1></a>
-      <a href="#drive/index"><h1>我的云盘</h1></a>
-      
-      <div v-for="(province,index) in root" :key="index">
-        
+    <!-- <main>
+      <div v-for="(item,index) in list" :key="index" class="search">
+        <div class="item" :data-uuid="item.uuid">
+          {{ item.title }}
+        </div>
       </div>
-    </main>
+    </main> -->
+    <h1>Youloge.com</h1>
     <section class="footer">
-      <p>皖ICP备 19004549号 公安备 34112402000344</p>
+      <a href="https://beian.miit.gov.cn/">
+        <p>皖ICP备 19004549号 公安备 34112402000344</p> 
+      </a>
     </section>
   </div>
+  <hash-view></hash-view>
 </template>
 <script setup>
 import { inject, onMounted, reactive, toRefs } from "vue";
@@ -24,20 +26,23 @@ const state = reactive({
   label:'',
   limit:10,
   offset:0,
-  connt:0
+  list:0,
+  count:0
 });
 onMounted(()=>{
-  // onShow()
+  onShow()
 })
 const onShow = ()=>{
-  useFetch().api('search','welcome',{query:'0',limit:10,offset:0}).then(res=>{
-    console.log(res)
+  useFetch().api('search','welcome',{query:'',limit:10,offset:0}).then(res=>{
+    state.count = res.data.count
+    state.list = res.data.list
+    // console.log(res)
   })
 }
 const onClick = ()=>{
   state.connt++;
 }
-const {connt,root} = toRefs(state)
+const {count,list,root} = toRefs(state)
 </script>
 <style lang="scss">
 .welcome{
@@ -48,7 +53,7 @@ const {connt,root} = toRefs(state)
   height: 100vh;
   text-align: center;
   h1,h2,h3{
-    color: #fff;
+    color: #222;
   }
   h1{
     font-size: 48px;
