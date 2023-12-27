@@ -29,6 +29,7 @@ export default defineConfig({
             404: '404.html',
             link: 'link.html',
             index: 'index.html',
+            video: 'video.html',
             drive: 'drive.html',
             goods: 'goods.html',
             search: 'search.html',
