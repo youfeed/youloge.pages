@@ -164,7 +164,6 @@ const createURL = ()=>{
 const onPayment = ()=>{
   let {mail} = useStorage('youloge')
   let {uuid,cost} = state;
-  console.log('233',state);
   usePayment({
     local:uuid,
     money:cost,
@@ -216,7 +215,7 @@ watch(
 const {uuid,title,intro,author,format,mime,etag,size,cost,owner,created,updated} = toRefs(state)
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .body{
   .item{
     display: flex;
