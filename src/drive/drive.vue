@@ -170,8 +170,7 @@ const onPayment = ()=>{
     mail:mail,
     notify:'https://www.youloge.com/notify',
   }).then(res=>{
-    console.log('233',res);
-    useMessage('success',`success`)
+    createURL()
   }).catch(msg=>{
     useMessage('warning',`支付失败-${msg}`)
   })
