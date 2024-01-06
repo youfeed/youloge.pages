@@ -73,7 +73,7 @@ export async function onRequestPost(context) {
   // const decrypt = await AES_decrypt(secret,signature);
   const {routed,method,params,signer,expire} = await AES_decrypt(secret,signature);
   // AES_decrypt 需要try catch 包裹
-  // return new Response(JSON.stringify(decrypt),{headers:{'content-type':'application/json;charset=UTF-8'}})
+  return new Response(JSON.stringify({routed,method,params,signer,expire}),{headers:{'content-type':'application/json;charset=UTF-8'}})
   if(signer === undefined){
     return new Response(JSON.stringify({err:400403,msg:'签名错误'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
   }
