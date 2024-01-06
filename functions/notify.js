@@ -67,10 +67,11 @@ export async function onRequestPost(context) {
   const secret = context.env.secret;
   const request = context.request;
   const timer = new Date().getTime() / 1000 >> 0;
-  const json =  await request.text();
+  const json =  await request.json();
   const signature = request.headers.get("Signature");
   const {signer,expire} = await AES_decrypt(secret,signature) ;
   // AES_decrypt 需要try catch 包裹
+  return new Response(JSON.stringify(json),{headers:{'content-type':'application/json;charset=UTF-8'}})
   if(signer === undefined){
     return new Response(JSON.stringify({err:403,msg:'签名错误2'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
   }
