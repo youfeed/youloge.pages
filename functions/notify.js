@@ -68,7 +68,8 @@ export async function onRequestPost(context) {
   const request = context.request;
   const timer = new Date().getTime() / 1000 >> 0;
   const json =  await request.json();
-  const signature = request.headers.get("Signature");
+  const signature = json.params.signature;
+  // const signature = request.headers.get("Signature");
   const {signer,expire} = await AES_decrypt(secret,signature) ;
   // AES_decrypt 需要try catch 包裹
   return new Response(JSON.stringify(json),{headers:{'content-type':'application/json;charset=UTF-8'}})
