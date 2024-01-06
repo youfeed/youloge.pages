@@ -70,20 +70,23 @@ export async function onRequestPost(context) {
   const json =  await request.json();
   const signature = json.params.signature;
   // const signature = request.headers.get("Signature");
-  const decrypt = await AES_decrypt(secret,signature);
-  // const {signer,expire} = await AES_decrypt(secret,signature);
+  // const decrypt = await AES_decrypt(secret,signature);
+  const {routed,method,params,signer,expire} = await AES_decrypt(secret,signature);
   // AES_decrypt 需要try catch 包裹
-  return new Response(JSON.stringify(decrypt),{headers:{'content-type':'application/json;charset=UTF-8'}})
+  // return new Response(JSON.stringify(decrypt),{headers:{'content-type':'application/json;charset=UTF-8'}})
   if(signer === undefined){
-    return new Response(JSON.stringify({err:403,msg:'签名错误2'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
+    return new Response(JSON.stringify({err:400403,msg:'签名错误2'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
   }
   if(timer > expire){
-    return new Response(JSON.stringify({err:401,msg:'签名已过期2'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
+    return new Response(JSON.stringify({err:400401,msg:'签名已过期'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
   }
-  const text = await fetch(`https://vip.youloge.com${path}`, {
+  const text = await fetch(`https://vip.youloge.com${routed}`, {
     method: 'POST',
     headers: {'content-Type': 'application/json','signer': signer},
-    body: json
+    body: {
+      method:method,
+      params:params
+    }
   }).then(r=>r.text());
   return new Response(text,{headers:{'content-type':'application/json;charset=UTF-8'}});
 }
