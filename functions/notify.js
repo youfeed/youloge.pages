@@ -79,8 +79,8 @@ export async function onRequestPost(context) {
   if(timer > expire){
     return new Response(JSON.stringify({err:400401,msg:'签名已过期'},null,2),{headers:{'content-type':'application/json;charset=UTF-8'}})
   }
-  return new Response(JSON.stringify({routed,method,params,signer,expire}),{headers:{'content-type':'application/json;charset=UTF-8'}})
-  const text = await fetch(`https://vip.youloge.com${routed}`, {
+  // return new Response(JSON.stringify({routed,method,params,signer,expire}),{headers:{'content-type':'application/json;charset=UTF-8'}})
+  const text = await fetch(`https://vip.youloge.com/${routed}`, {
     method: 'POST',
     headers: {'content-Type': 'application/json','signer': signer},
     body: JSON.stringify({method:method,params:params}),
