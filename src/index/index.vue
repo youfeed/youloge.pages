@@ -7,10 +7,10 @@
         </div>
       </div>
     </main> -->
-    <h1>Youloge.com</h1>
+    <h1>杰克布达</h1>
     <section class="footer">
       <a href="https://beian.miit.gov.cn/">
-        <p>皖ICP备 19004549号 公安备 34112402000344</p> 
+        <p>皖ICP备 19004549-1号 公安备 34112402000344</p> 
       </a>
     </section>
   </div>
